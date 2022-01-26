@@ -66,7 +66,7 @@ const Posts = () => {
           createdAt: item.data().createdAt
         })
       })
-      setPosts(posts.sort((a, b) => a.createdAt.seconds - b.createdAt.seconds))
+      setPosts(posts.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds))
     })
   }, [channelId])
 
