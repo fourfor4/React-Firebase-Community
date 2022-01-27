@@ -8,6 +8,7 @@ import CreateChannelModal from '../components/modals/CreateChannel';
 import Channels from '../components/Channel&Post/Channles';
 import Posts from '../components/Channel&Post/Posts';
 
+// Component with Channel part and posts part.
 const Home = () => {
   const [createChannelModalVisible, setCreateChannelModalVisible] = useState(false)
 

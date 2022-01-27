@@ -7,6 +7,8 @@ import { Button, Empty, Comment, Tooltip, Divider, Avatar, BackTop } from "antd"
 import moment from 'moment'
 import { toast } from "react-toastify";
 
+
+// component for posts
 const Posts = () => {
 
   const [createPostModalVisible, setCreatePostModalVisible] = useState(false)
@@ -23,7 +25,7 @@ const Posts = () => {
       setCreatePostModalVisible(true)
       setReplyPostId('')
     } else {
-      toast.error("You can't access this action.");
+      toast.error("You are not allowed to post, because you are not a member of levelshealth.com.");
     }
   }
 
@@ -33,7 +35,7 @@ const Posts = () => {
       setCreatePostModalVisible(true)
       setReplyPostId(post.id)
     } else {
-      toast.error("You can't access this action.");
+      toast.error("You are not allowed to post, because you are not a member of levelshealth.com.");
     }
   }
 

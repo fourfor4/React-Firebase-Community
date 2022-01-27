@@ -5,6 +5,7 @@ import { Divider } from 'antd'
 import { setChannelId } from '../../actions/communityActions';
 import classnames from 'classnames'
 
+// component for channels.
 const Channels = () => {
   const [channels, setChannels] = useState([])
 

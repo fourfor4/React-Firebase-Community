@@ -17,7 +17,7 @@ const Register = ({ history }) => {
     if (user) history.push("/")
   }, [user]);
 
-  //^Register user
+  //^Register user with Email and Password.
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(email, password)
@@ -33,7 +33,7 @@ const Register = ({ history }) => {
       );
     } catch (error) {
       toast.error(
-        'You are not registed successfully, try again!'
+        'You are not registed, try again!'
       );
       setEmail("");
     }

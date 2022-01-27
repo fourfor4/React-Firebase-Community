@@ -8,12 +8,13 @@ import { Link } from 'react-router-dom'
 import { setUser } from "../../actions/userActions";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("gru@gmail.com");
-  const [password, setPassword] = useState("target");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   let dispatch = useDispatch();
 
+  // SignIn with Email and Password
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -35,6 +36,7 @@ const Login = ({ history }) => {
     }
   };
 
+  // Google Login
   const googleLogin = async () => {
     auth
       .signInWithPopup(googleAuthProvider)
@@ -50,7 +52,6 @@ const Login = ({ history }) => {
         }
       })
       .catch(err => toast.error(err))
-
 
   };
 
