@@ -51,7 +51,7 @@ const Login = ({ history }) => {
             // allow the permission to access the post action
             permission: user.email.indexOf('@levelshealth.com') > -1
           }));
-
+          toast.success(constants.login_success)
           history.push("/");
         }
       })
