@@ -21,12 +21,16 @@ const Posts = () => {
 
   // Create Post with permission
   const createPost = () => {
-    if (user.permission) {
-      setPostTitle('Create Post')
-      setCreatePostModalVisible(true)
-      setReplyPostId('')
+    if (channelId !== "") {
+      if (user.permission) {
+        setPostTitle('Create Post')
+        setCreatePostModalVisible(true)
+        setReplyPostId('')
+      } else {
+        toast.error(constants.permisson_error);
+      }
     } else {
-      toast.error(constants.permisson_error);
+      toast.error(constants.new_post_no_channel);
     }
   }
 
