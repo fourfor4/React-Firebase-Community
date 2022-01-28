@@ -15,8 +15,6 @@ import { logOut } from "../../actions/userActions";
 
 const { SubMenu, Item } = Menu;
 
-
-
 const Header = () => {
   const [current, setCurrent] = useState("home");
   const [theme, setTheme] = useState("dark")
@@ -25,20 +23,19 @@ const Header = () => {
   let { user } = useSelector((state) => ({ ...state }));
 
   const handleClick = (e) => {
-    // console.log(e.key);
     setCurrent(e.key);
   };
 
+  // Logout
   const logout = () => {
     firebase.auth().signOut();
     dispatch(logOut())
     history.push("/login")
   }
 
-
+  // set theme
   const handlethemeChange = (value) => {
     value ? setTheme('dark') : setTheme('light')
-
   }
 
   return (

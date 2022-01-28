@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { Input } from 'antd';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
-import moment from 'moment'
 import { toast } from 'react-toastify';
 
 const { TextArea } = Input
@@ -13,6 +12,7 @@ const CreatePost = ({ isModalVisible, setIsModalVisible, channelId, postTitle, r
 
   const { user } = useSelector((state) => ({ ...state }));
 
+  // Add or Reply post
   const handleOk = () => {
     if (postSubject !== "" && postBody !== "") {
       db.collection('channels').doc(channelId).collection('posts').add({
@@ -30,6 +30,7 @@ const CreatePost = ({ isModalVisible, setIsModalVisible, channelId, postTitle, r
     }
   };
 
+  // Cancel modal
   const handleCancel = () => {
     setPostSubject("")
     setPostBody("")

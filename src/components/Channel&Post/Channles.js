@@ -20,6 +20,8 @@ const Channels = () => {
   }
 
   useEffect(() => {
+
+    // Hook the change of channels in the database realtime
     db.collection('channels').onSnapshot(data => {
       let channels = []
       data.forEach(item => {

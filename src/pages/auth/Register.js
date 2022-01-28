@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "antd";
 import { setUser } from "../../actions/userActions";
 
 
@@ -17,10 +16,10 @@ const Register = ({ history }) => {
     if (user) history.push("/")
   }, [user]);
 
-  //^Register user with Email and Password.
+  // Register user with Email and Password.
   const handleSubmit = async (e) => {
+
     e.preventDefault();
-    console.log(email, password)
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password)
       dispatch(setUser({
@@ -32,16 +31,25 @@ const Register = ({ history }) => {
         'You are registed successfully, you will go to the dashboard!'
       );
     } catch (error) {
-      toast.error(
-        'You are not registed, try again!'
-      );
+      console.log(error)
+      if (error.code === "auth/email-already-in-use") {
+        toast.error(
+          'This email is registed already!'
+        );
+      } else {
+        toast.error(
+          'You are not registed, try again!'
+        );
+      }
       setEmail("");
     }
 
-    //^save user email in local storage
+    // save user email in local storage
     window.localStorage.setItem("emailForRegistration", email);
   };
 
+
+  // Register with Email and Password - render part
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
       <input
@@ -59,7 +67,11 @@ const Register = ({ history }) => {
         autoFocus
       />
       <div className="text-center">
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={!email || !password}
+        >
           Register
         </button>
       </div>

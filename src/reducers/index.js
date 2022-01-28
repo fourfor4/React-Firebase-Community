@@ -6,7 +6,6 @@ import { communityReducer } from "./communityReducer";
 const rootReducer = combineReducers({
   user: userReducer,
   community: communityReducer
-
 });
 
 export default rootReducer;

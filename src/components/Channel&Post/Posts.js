@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { db } from "../../firebase";
-import { PlusOutlined, RollbackOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import CreatePost from "../modals/CreatePost";
 import { Button, Empty, Comment, Tooltip, Divider, Avatar, BackTop } from "antd";
-import moment from 'moment'
 import { toast } from "react-toastify";
 
 
@@ -19,6 +18,7 @@ const Posts = () => {
   const { channelId } = useSelector(state => state.community)
   const user = useSelector(state => state.user)
 
+  // Create Post with permission
   const createPost = () => {
     if (user.permission) {
       setPostTitle('Create Post')
@@ -29,6 +29,7 @@ const Posts = () => {
     }
   }
 
+  // Reply Post with permission
   const replyPost = (post) => {
     if (user.permission) {
       setPostTitle('Reply Post')
@@ -39,6 +40,7 @@ const Posts = () => {
     }
   }
 
+  // Header of post - render part
   const replyHeader = (post) => {
     console.log(post)
     if (post.replyPostId !== "") {
@@ -56,6 +58,8 @@ const Posts = () => {
   }
 
   useEffect(() => {
+
+    // Hook the change of posts in the database realtime
     channelId != '' && db.collection('channels').doc(channelId).collection('posts').onSnapshot(data => {
       let posts = []
       data.forEach(item => {

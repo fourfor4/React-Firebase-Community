@@ -21,9 +21,11 @@ const Login = ({ history }) => {
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
       const { user } = result;
+      // set the current user
       dispatch(setUser({
         name: user.displayName,
         email: user.email,
+        // allow the permission to access the post action
         permission: user.email.indexOf('@levelshealth.com') > -1
       }));
       history.push("/")
@@ -43,18 +45,20 @@ const Login = ({ history }) => {
       .then(async (result) => {
         const { user } = result;
         if (user && user.emailVerified == true) {
+          // set the current user
           dispatch(setUser({
             name: user.displayName,
             email: user.email,
+            // allow the permission to access the post action
             permission: user.email.indexOf('@levelshealth.com') > -1
           }));
           history.push("/");
         }
       })
       .catch(err => toast.error(err))
-
   };
 
+  // Login with Email and Password - render part
   const loginForm = () => (
     <form onSubmit={handleSubmit}>
       <div className="form-group">

@@ -18,6 +18,7 @@ function App() {
   const history = useHistory()
 
   useEffect(() => {
+
     //getting the active user status
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -32,7 +33,6 @@ function App() {
     })
     //stop after getting once
     return () => unsubscribe();
-
   }, [])
 
 

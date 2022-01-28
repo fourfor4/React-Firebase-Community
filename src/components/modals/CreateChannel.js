@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { Input } from 'antd';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ const CreateChannelModal = ({ isModalVisible, setIsModalVisible }) => {
   const [channelName, setChannelName] = useState("");
   const { user } = useSelector((state) => ({ ...state }));
 
+  // Add channel
   const handleOk = () => {
     setChannelName("")
     setIsModalVisible(false);
@@ -18,6 +19,7 @@ const CreateChannelModal = ({ isModalVisible, setIsModalVisible }) => {
     })
   };
 
+  // Cancel modal
   const handleCancel = () => {
     setChannelName("")
     setIsModalVisible(false);
