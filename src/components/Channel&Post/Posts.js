@@ -5,6 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import CreatePost from "../modals/CreatePost";
 import { Button, Empty, Comment, Tooltip, Divider, Avatar, BackTop } from "antd";
 import { toast } from "react-toastify";
+import constants from "../../constants";
 
 
 // component for posts
@@ -25,7 +26,7 @@ const Posts = () => {
       setCreatePostModalVisible(true)
       setReplyPostId('')
     } else {
-      toast.error("You are not allowed to post, because you are not a member of levelshealth.com.");
+      toast.error(constants.permisson_error);
     }
   }
 
@@ -36,13 +37,12 @@ const Posts = () => {
       setCreatePostModalVisible(true)
       setReplyPostId(post.id)
     } else {
-      toast.error("You are not allowed to post, because you are not a member of levelshealth.com.");
+      toast.error(constants.permisson_error);
     }
   }
 
   // Header of post - render part
   const replyHeader = (post) => {
-    console.log(post)
     if (post.replyPostId !== "") {
       const replyPost = posts.filter(item => item.id === post.replyPostId)[0]
       return (

@@ -3,9 +3,9 @@ import { auth, googleAuthProvider, db } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom'
+import { useDispatch } from "react-redux";
 import { setUser } from "../../actions/userActions";
+import constants from "../../constants";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -28,11 +28,10 @@ const Login = ({ history }) => {
         // allow the permission to access the post action
         permission: user.email.indexOf('@levelshealth.com') > -1
       }));
+      toast.success(constants.login_success)
       history.push("/")
     }
-
     catch (error) {
-      console.log(error);
       toast.error(error.message);
       setLoading(false);
     }
@@ -52,6 +51,7 @@ const Login = ({ history }) => {
             // allow the permission to access the post action
             permission: user.email.indexOf('@levelshealth.com') > -1
           }));
+
           history.push("/");
         }
       })
@@ -91,7 +91,7 @@ const Login = ({ history }) => {
         shape="round"
         icon={<MailOutlined />}
         size="large"
-        disabled={!email || password.length < 6}
+        disabled={!email || !password}
       >
         Login with Email/Password
       </Button>

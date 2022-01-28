@@ -4,6 +4,7 @@ import { Input } from 'antd';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import constants from '../../constants';
 
 const { TextArea } = Input
 const CreatePost = ({ isModalVisible, setIsModalVisible, channelId, postTitle, replyPostId }) => {
@@ -26,7 +27,7 @@ const CreatePost = ({ isModalVisible, setIsModalVisible, channelId, postTitle, r
       setPostBody("")
       setIsModalVisible(false);
     } else {
-      toast.error('Please fill the subject and body')
+      toast.error(constants.post_alert)
     }
   };
 

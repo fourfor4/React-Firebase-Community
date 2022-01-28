@@ -3,6 +3,8 @@ import { Modal } from 'antd';
 import { Input } from 'antd';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import constants from '../../constants';
 
 const CreateChannelModal = ({ isModalVisible, setIsModalVisible }) => {
   const [channelName, setChannelName] = useState("");
@@ -10,13 +12,18 @@ const CreateChannelModal = ({ isModalVisible, setIsModalVisible }) => {
 
   // Add channel
   const handleOk = () => {
-    setChannelName("")
-    setIsModalVisible(false);
-    db.collection('channels').add({
-      name: channelName,
-      email: user.email,
-      createdAt: new Date()
-    })
+    if (channelName !== "") {
+      setChannelName("")
+      setIsModalVisible(false);
+      db.collection('channels').add({
+        name: channelName,
+        email: user.email,
+        createdAt: new Date()
+      })
+    } else {
+      toast.error(constants.channel_alert)
+    }
+
   };
 
   // Cancel modal

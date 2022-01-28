@@ -3,6 +3,7 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../actions/userActions";
+import constants from "../../constants";
 
 
 const Register = ({ history }) => {
@@ -28,17 +29,16 @@ const Register = ({ history }) => {
         permission: user.email.indexOf('@levelshealth.com') > -1
       }));
       toast.success(
-        'You are registed successfully, you will go to the dashboard!'
+        constants.register_success
       );
     } catch (error) {
-      console.log(error)
       if (error.code === "auth/email-already-in-use") {
         toast.error(
-          'This email is registed already!'
+          constants.register_error_email
         );
       } else {
         toast.error(
-          'You are not registed, try again!'
+          constants.register_error
         );
       }
       setEmail("");
